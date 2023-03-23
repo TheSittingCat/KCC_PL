@@ -1,4 +1,5 @@
 from lark import Lark
+#Grammar for the parser
 grammar = r'''
 start: fun name lp [type] rp lb (exp | funcall)+ rb | fun name lp [type] rp lb (expstr | funcall)+ rb | fun name lp [type] rp lb (exp | funcall)+ rb start | fun name lp [type] rp lb (expstr | funcall)+ rb start
 fun: "function"
@@ -21,17 +22,13 @@ funcall: name lp (name | name "=" exp | name "=" expstr)* rp
 
 '''
 def parser(grammar, starter) :
+    #Generates the parser from the grammar
     parser = Lark(grammar, start = starter)
     return parser
 def tree_generator(parser, text) : 
+    #Generates the tree from the text
     tree = parser.parse(text)
     return tree
-
-parser = parser(grammar, starter = 'start')
-test = """
-function kaveh(int) {
-randomfunction(Hello = "shayesteh")
-}
-"""
-tree = tree_generator(parser, test) 
-print(tree.pretty())
+def tree_printer(tree) :
+    #Outputs the tree in the pretty format
+    print(tree.pretty())
