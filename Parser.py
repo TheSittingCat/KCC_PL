@@ -5,7 +5,7 @@ start: fun name lp [type] rp lb (exp | funcall)+ rb | fun name lp [type] rp lb (
 fun: "function"
 name: /.+?(?<!\\)/ name | /.+?(?<!\\)/
 lp: "("
-type: "int" | "str" | "float" | "shape"
+?type: "int" | "str" | "float" | "shape"
 rp: ")"
 lb: "{"
 rb: "}"
