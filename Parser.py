@@ -14,11 +14,19 @@ def grammar() :
     rp: ")"
     lb: "{"
     rb: "}"
-    exp: NUMBER | exp1 | name "=" exp1
-    exp1: exp1 "+" exp1 | exp1 "-" exp1 | exp1 "*" exp2 | exp1 "/" exp2 | exp1 "%" exp2 | exp2
-    exp2: exp2 "*" exp2 | exp2 "/" exp2 | exp2 "%" exp2 | exp2 "^" exp3 | exp3 
-    exp3: exp3 "^" exp3 | exp
-    expstr: STRING | name "=" STRING
+    exp: NUMBER | exp1 | name equals exp1 end
+    exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
+    exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
+    exp3: exp3 power exp3 | exp
+    expstr: STRING | name equals STRING
+    equals: "="
+    plus: "+"
+    minus: "-"
+    multiply: "*"
+    divide: "/"
+    modulus: "%"
+    power: "^"
+    end: ";"
     funcall: name lp (name | name "=" exp | name "=" expstr)* rp
     %import common.ESCAPED_STRING -> STRING
     %import common.SIGNED_NUMBER -> NUMBER
