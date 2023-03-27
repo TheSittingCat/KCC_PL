@@ -94,11 +94,10 @@ class Evaluator(Transformer):
             args = " ".join(arg_list)
             return args
     def end(self, args):
-        return ";"
+        return "\n"
 test = r'''function test (int) {
-Hello = "Hello World";
-Christina = 5;
-Camille = 6;
+Hello = "Hello World"; 
+Hi = 4518;
  }'''
 
 def transform_result(entry):
@@ -106,5 +105,8 @@ def transform_result(entry):
     parser = Parser.parser(grammar, "start")
     tree = Parser.tree_generator(parser, entry)
     print(tree.pretty())
-    return Evaluator().transform(tree)[1:-1]
-transform_result(test)
+    evaled = Evaluator().transform(tree)[1:-1].split(", ")
+    evaled[6] = evaled[6].replace(";", "\\n ")
+    print(evaled[6])
+    return evaled
+print(transform_result(test))

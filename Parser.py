@@ -4,7 +4,6 @@ def grammar() :
     grammar = r'''
     start: fun name lp ([type] | name "=" (exp | expstr))* rp lb (exp | funcall)+ rb | fun name lp [type] rp lb (expstr | funcall)+ rb | fun name lp [type] rp lb (exp | funcall)+ rb start | fun name lp [type] rp lb (expstr | funcall)+ rb start
     fun: "function"
-    name: (/.+?(?<!\\)/)*
     lp: "("
     ?type: int_rule | str_rule | float_rule | shape_rule
     int_rule: "int"
@@ -14,11 +13,6 @@ def grammar() :
     rp: ")"
     lb: "{"
     rb: "}"
-    exp: NUMBER | exp1 | name equals exp1 end
-    exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
-    exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
-    exp3: exp3 power exp3 | exp
-    expstr: STRING | name equals STRING
     equals: "="
     plus: "+"
     minus: "-"
@@ -27,12 +21,17 @@ def grammar() :
     modulus: "%"
     power: "^"
     end: ";"
-    funcall: name lp (name | name "=" exp | name "=" expstr)* rp
     %import common.ESCAPED_STRING -> STRING
     %import common.SIGNED_NUMBER -> NUMBER
+    name: (/.([a-z]*[A-Z]*[0-9]*)*/)*
     %import common.WS
     %ignore WS
-
+    expstr: STRING | name equals STRING end
+    exp: NUMBER | exp1 | name equals exp1 end
+    exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
+    exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
+    exp3: exp3 power exp3 | exp
+    funcall: name lp (name | name "=" exp | name "=" expstr)* rp
     '''
     return grammar
 def parser(grammar, starter) :
