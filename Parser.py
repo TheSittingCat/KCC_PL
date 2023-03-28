@@ -23,11 +23,11 @@ def grammar() :
     end: ";"
     %import common.ESCAPED_STRING -> STRING
     %import common.SIGNED_NUMBER -> NUMBER
-    name: (/.([a-z]*[A-Z]*[0-9]*)*/)*
+    name: /[a-zA-Z0-9]+/
     %import common.WS
     %ignore WS
-    expstr: STRING | name equals STRING end
-    exp: NUMBER | exp1 | name equals exp1 end
+    expstr: STRING | name equals STRING end | exp
+    exp: NUMBER | exp1 | name equals exp1 end | expstr
     exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
     exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
     exp3: exp3 power exp3 | exp

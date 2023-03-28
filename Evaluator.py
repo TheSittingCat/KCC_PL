@@ -96,8 +96,9 @@ class Evaluator(Transformer):
     def end(self, args):
         return "\n"
 test = r'''function test (int) {
-Hello = "Hello World"; 
-Hi = 4518;
+Hello = 245;
+Bye = "Bye World";
+Num = 2689;
  }'''
 
 def transform_result(entry):
@@ -106,7 +107,5 @@ def transform_result(entry):
     tree = Parser.tree_generator(parser, entry)
     print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
-    evaled[6] = evaled[6].replace(";", "\\n ")
-    print(evaled[6])
     return evaled
 print(transform_result(test))
