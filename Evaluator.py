@@ -97,8 +97,6 @@ class Evaluator(Transformer):
         return ";"
 test = r'''function test (int) {
 Hello = "Hello World";
-Christina = 5;
-Camille = 6;
  }'''
 
 def transform_result(entry):
