@@ -68,6 +68,15 @@ class Evaluator(Transformer):
                 arg_list.append(str(arg))
             args = " ".join(arg_list)
             return args
+    def funcall(self, args):
+        function_name = args[0]
+        arguments = args[1:]
+        branch_list = [function_name] # initialize list with function name
+        for arg in arguments:
+            if isinstance(arg, list):
+                # if argument is a list, recursively traverse it to get all sub-branches
+                branch_list += self.funcall(arg)
+        return branch_list
     def equals(self, args):
         return "="
     def plus(self, args):
