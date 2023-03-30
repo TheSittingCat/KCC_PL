@@ -21,6 +21,7 @@ def grammar() :
     modulus: "%"
     power: "^"
     end: ";"
+    comma: ","
     %import common.ESCAPED_STRING -> STRING
     %import common.SIGNED_NUMBER -> NUMBER
     name: /[a-zA-Z0-9]+/
@@ -31,7 +32,7 @@ def grammar() :
     exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
     exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
     exp3: exp3 power exp3 | exp
-    funcall: name lp (name | name "=" exp | name "=" expstr)* rp
+    funcall: name lp (name | name equals exp | name equals expstr | exp | name comma | name equals exp comma | name equals expstr comma | exp comma)* rp end
     '''
     return grammar
 def parser(grammar, starter) :
