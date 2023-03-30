@@ -94,11 +94,19 @@ class Evaluator(Transformer):
             args = " ".join(arg_list)
             return args
     def end(self, args):
-        return ";"
+        return "\n"
+    def funcall(self, args):
+        function_name = args[0]
+        arguments = args[1:]
+        branch_list = [function_name] # initialize list with function name
+        for arg in arguments:
+            if isinstance(arg, list):
+                # if argument is a list, recursively traverse it to get all sub-branches
+                branch_list += self.funcall(arg)
+        return branch_list
 test = r'''function test (int) {
-Hello = "Hello World";
-Christina = 5;
-Camille = 6;
+Hello = 245;
+function(par = "ranpar")
  }'''
 
 def transform_result(entry):
@@ -106,5 +114,6 @@ def transform_result(entry):
     parser = Parser.parser(grammar, "start")
     tree = Parser.tree_generator(parser, entry)
     print(tree.pretty())
-    return Evaluator().transform(tree)[1:-1]
-transform_result(test)
+    evaled = Evaluator().transform(tree)[1:-1].split(", ")
+    return evaled
+print(transform_result(test))
