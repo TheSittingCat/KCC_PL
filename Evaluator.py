@@ -96,17 +96,19 @@ class Evaluator(Transformer):
     def end(self, args):
         return "\n"
     def funcall(self, args):
-        function_name = args[0]
-        arguments = args[1:]
-        branch_list = [function_name] # initialize list with function name
-        for arg in arguments:
-            if isinstance(arg, list):
-                # if argument is a list, recursively traverse it to get all sub-branches
-                branch_list += self.funcall(arg)
-        return branch_list
+        arg_list = []
+        for arg in args:
+            arg_list.append(str(arg))
+        args = "".join(arg_list)
+        return args
+    def comma(self, args):
+        return ","
 test = r'''function test (int) {
-Hello = 245;
-function(par = "ranpar")
+test = 1 + 2;
+function(par = "ranpar");
+whattodo(25,43,18);
+blue = 4 + 6 * 9;
+kaveh = "kaveh";
  }'''
 
 def transform_result(entry):
