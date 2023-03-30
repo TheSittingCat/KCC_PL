@@ -103,14 +103,6 @@ class Evaluator(Transformer):
         return args
     def comma(self, args):
         return ","
-test = r'''function test (int) {
-test = 1 + 2;
-function(par = "ranpar");
-whattodo(25,43,18);
-blue = 4 + 6 * 9;
-kaveh = "kaveh";
- }'''
-
 def transform_result(entry):
     grammar = Parser.grammar()
     parser = Parser.parser(grammar, "start")
@@ -118,4 +110,3 @@ def transform_result(entry):
     print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
     return evaled
-print(transform_result(test))
