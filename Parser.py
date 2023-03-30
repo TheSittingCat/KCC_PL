@@ -1,3 +1,4 @@
+# The purpose of this file is to generate the parser and the tree from the text. The parser is generated from the grammar and the tree is generated from the text.
 from lark import Lark
 #Grammar for the parser
 def grammar() : 
