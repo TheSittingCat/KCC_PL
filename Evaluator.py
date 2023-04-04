@@ -27,7 +27,7 @@ class Evaluator(Transformer):
     def shape_rule(self, args):
         return "shape "
     def lb(self, args):
-        return ": \n \t"
+        return "\n \t"
     def rb(self, args):
         return "\n"
     def NUMBER(self, args):

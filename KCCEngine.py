@@ -24,8 +24,11 @@ def write_file(file_name, code):
     # The file is opened in write mode.
     # Write the python code to the file.
     # Changes .txt to .py
+    # Replace the actual new line and tab characters with the escape sequences.
+    code = code.replace(r'\t', "\t")
+    code = code.replace(r'\n', "\n")
     file_name = re.sub(r"\.txt$", ".py", file_name)
-    with open(file_name + ".py", "w") as file:
+    with open(file_name, "w", encoding= "ascii") as file:
         file.write(code)
     return file_name
 def py_list_to_string(py_list):
@@ -33,6 +36,7 @@ def py_list_to_string(py_list):
     # The list is converted to a string by joining the elements of the list.
     py_list = [i for i in py_list if i != "None"]
     #remove quotes from strings
+    #Convert double backslashes to single backslashes
     for i in range(len(py_list)):
         py_list[i] = re.sub(r"\'", "", py_list[i])
     return "".join(py_list)
