@@ -7,7 +7,7 @@ class Evaluator(Transformer):
     def start(self, args):
         return str(args)
     def fun(self, args):
-        return "def"
+        return "def "
     def name(self, args):
         arg_list = []
         for arg in args:
@@ -19,13 +19,13 @@ class Evaluator(Transformer):
     def rp (self, args):
         return ")"
     def int_rule(self, args):
-        return "int"
+        return "int "
     def str_rule(self, args):
-        return "str"
+        return "str "
     def float_rule(self, args):
-        return "float"
+        return "float "
     def shape_rule(self, args):
-        return "shape"
+        return "shape "
     def lb(self, args):
         return ": \n \t"
     def rb(self, args):
@@ -72,17 +72,17 @@ class Evaluator(Transformer):
     def equals(self, args):
         return "="
     def plus(self, args):
-        return "+"
+        return " + "
     def minus(self, args):  
-        return "-"
+        return " - "
     def multiply(self, args):
-        return "*"
+        return " * "
     def divide(self, args):
-        return "/"
+        return " / "
     def modulus(self, args):
-        return "%"
+        return " % "
     def power(self, args):
-        return "**"
+        return " ** "
     def STRING(self, args):
         return str(args)
     def expstr(self, args):
@@ -103,7 +103,7 @@ class Evaluator(Transformer):
         args = "".join(arg_list)
         return args
     def comma(self, args):
-        return ","
+        return " , "
 def transform_result(entry):
     grammar = Parser.grammar()
     parser = Parser.parser(grammar, "start")
