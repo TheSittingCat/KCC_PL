@@ -111,4 +111,3 @@ def transform_result(entry):
     print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
     return evaled
-print("Hello")
