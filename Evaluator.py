@@ -27,7 +27,7 @@ class Evaluator(Transformer):
     def shape_rule(self, args):
         return "shape "
     def lb(self, args):
-        return "\n \t"
+        return ": \n \t"
     def rb(self, args):
         return "\n"
     def NUMBER(self, args):
@@ -95,7 +95,7 @@ class Evaluator(Transformer):
             args = " ".join(arg_list)
             return args
     def end(self, args):
-        return "\n"
+        return "\n \t"
     def funcall(self, args):
         arg_list = []
         for arg in args:
