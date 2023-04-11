@@ -3,7 +3,7 @@ from lark import Lark
 #Grammar for the parser
 def grammar() : 
     grammar = r'''
-    start: fun name lp ([type] | name equals (exp | expstr))* rp lb (exp | funcall)+ return (exp | expstr)? rb (start)* | fun name lp [type] rp lb (expstr | funcall)+ return (exp | expstr)? rb (start)*
+    start: fun name lp ([type] | name equals (exp | expstr))* rp lb (exp | funcall)+ [return (exp | expstr)] rb (start)* | fun name lp [type] rp lb (expstr | funcall)+ [return (exp | expstr)] rb (start)*
     fun: "function"
     lp: "("
     type: int_rule | str_rule | float_rule | shape_rule
@@ -15,6 +15,7 @@ def grammar() :
     lb: "{"
     rb: "}"
     return: "return"
+    returnstr: "returnstr"
     equals: "="
     plus: "+"
     minus: "-"
@@ -30,6 +31,7 @@ def grammar() :
     %import common.WS
     %ignore WS
     return: returnstr (exp | name | NUMBER)
+    returnstr: STRING | name equals STRING end | return
     expstr: STRING | name equals STRING end | exp
     exp: NUMBER | exp1 | name equals exp1 end | expstr
     exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
