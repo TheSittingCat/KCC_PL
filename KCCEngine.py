@@ -46,12 +46,11 @@ def py_list_to_string(py_list):
     return "".join(py_list)
 def main() : 
     #Call the functions in the correct order.
-
     path = get_arguments()
     code = read_file(path)
     code = parse_kcc_code(code)
     code = py_list_to_string(code)
-    file_name, code = write_file(path, code)
+    file_name, code = write_file(path+".py", code)
     print(code)
     print("File created: " + file_name)
 main()

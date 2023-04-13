@@ -102,12 +102,14 @@ class Evaluator(Transformer):
             arg_list.append(str(arg))
         args = "".join(arg_list)
         return args
-    def __return__(self, args):
+    def returnstatement(self, args):
         arg_list = []
         for arg in args:
             arg_list.append(str(arg))
         args = "".join(arg_list)
         return args
+    def returnstr(self, args):
+        return "return"
     def comma(self, args):
         return " , "
 def transform_result(entry):
