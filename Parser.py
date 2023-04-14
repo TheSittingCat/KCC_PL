@@ -14,7 +14,7 @@ def grammar() :
     rp: ")"
     lb: "{"
     rb: "}"
-    returnstr: "return" (STRING | name equals STRING end)
+    returnstr: "return"
     returnstatement: exp | expstr | returnstr
     equals: "="
     plus: "+"

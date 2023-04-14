@@ -106,7 +106,7 @@ class Evaluator(Transformer):
         arg_list = []
         for arg in args:
             arg_list.append(str(arg))
-        args = "".join(arg_list)
+        args = " ".join(arg_list)
         return args
     def returnstr(self, args):
         return "return"
