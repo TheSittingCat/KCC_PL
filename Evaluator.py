@@ -94,6 +94,14 @@ class Evaluator(Transformer):
                 arg_list.append(str(arg))
             args = " ".join(arg_list)
             return args
+    def returnstatement(self, args):
+        arg_list = []
+        for arg in args:
+            arg_list.append(str(arg))
+        args = "".join(arg_list)
+        return args
+    def returnstr(self, args):
+        return "return"
     def end(self, args):
         return "\n \t"
     def funcall(self, args):

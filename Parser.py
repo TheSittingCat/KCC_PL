@@ -15,7 +15,7 @@ def grammar() :
     lb: "{"
     rb: "}"
     returnstr: "return"
-    returnstatement: exp | expstr | returnstr
+    returnstatement: returnstr (exp | expstr)
     equals: "="
     plus: "+"
     minus: "-"
