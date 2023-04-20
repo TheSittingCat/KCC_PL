@@ -126,4 +126,6 @@ def transform_result(entry):
     tree = Parser.tree_generator(parser, entry)
     print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
-    return evaled
+    includes = "import Graph_Equations"
+    imported = includes + evaled
+    return imported
