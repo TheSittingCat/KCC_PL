@@ -27,7 +27,7 @@ class Evaluator(Transformer):
     def shape_rule(self, args):
         return "shape "
     def lb(self, args):
-        return ": \n \t"
+        return ":\n \t"
     def rb(self, args):
         return "\n"
     def NUMBER(self, args):
@@ -126,6 +126,4 @@ def transform_result(entry):
     tree = Parser.tree_generator(parser, entry)
     print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
-    includes = "import Graph_Equations"
-    imported = includes + evaled
-    return imported
+    return evaled
