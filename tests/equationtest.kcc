@@ -1,0 +1,16 @@
+import Graph_Equations
+
+y1 = line(-4, 5)
+y2 = line(2)
+y3 = x_squared(1, 2, 3)
+y4 = x_cubed(1, 2, 3, 4)
+y5 = sqrt_x()
+y6 = abs_val()
+y7 = abs_val(y2)
+y8 = sqrt_x(y7)
+y9 = exponential()
+y10 = log(base = 2)
+p1 = point(3, 2)
+p2 = point(-4, -7)
+
+plt.show()
