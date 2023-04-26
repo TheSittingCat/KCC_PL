@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.patches as ptc
 import math
 
 def point(x, y):
@@ -64,3 +65,19 @@ def log(x = None, base = 10, rng = (1, 100)):
         y.append(math.log(n, base))
     plt.plot(x, y)
     return y
+
+def circle(center, radius):
+    x = center[0]
+    y = center[1]
+    figure, axes = plt.subplots()
+    axes.set_xlim(((x - radius) - 5, (x + radius) + 5))
+    axes.set_ylim(((y - radius) - 5, (y + radius) + 5))
+    axes.add_patch(ptc.Circle(center, radius, fill = False))
+
+def ellipse(center, width, height):
+    x = center[0]
+    y = center[1]
+    figure, axes = plt.subplots()
+    axes.set_xlim(((x - (width/2)) - 5, (x + (width/2)) + 5))
+    axes.set_ylim(((y - (height/2)) - 5, (y + (height/2)) + 5))
+    axes.add_patch(ptc.Ellipse(center, width, height, fill = False))

@@ -12,5 +12,7 @@ y9 = exponential()
 y10 = log(base = 2)
 p1 = point(3, 2)
 p2 = point(-4, -7)
+c = circle((2, 3), 5)
+e = ellipse((-1, 2), 4, 7)
 
 plt.show()
