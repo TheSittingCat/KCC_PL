@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.6"
 lark = "^1.1.5"
+Pillow = "^9.5.0"
 matplotlib = "^3.3.3"
 
 [build-system]
