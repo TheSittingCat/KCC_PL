@@ -1,7 +1,34 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as ptc
 import math
+from PIL import Image
+import numpy as np
 
+def openimage(path):
+    #Open an image and return its pixel data.
+    #The image is opened using the PIL module.
+    image = Image.open(path)
+    image_pixels = np.asarray(image)
+    return image_pixels, image
+def showimage(imagepixels = None, image = None, imagesize = None, imagemode = None):
+    #Show an image.
+    #The image is shown using the PIL module.
+    #The image is shown in a new window.
+    # if image_pixels is not None: Show the image using the image pixels.
+    # Else if image is not None: Show the image using the image object.
+    # Else if image_size and image_mode are not None: Create a new image and show it.
+    # Else: Raise an exception.
+    if imagepixels is not None:
+        if imagemode is None:
+            imagemode = "RGB"
+        if imagesize is None:
+            imagesize = (1280, 724)
+        img = plt.imshow(imagepixels)
+        plt.show()
+    elif image is not None:
+        image.show()
+    else : 
+        raise Exception("Image pixels or image object must be provided.")
 def point(x, y):
     plt.xlim(x - 5, x + 5)
     plt.ylim(y - 5, y + 5)

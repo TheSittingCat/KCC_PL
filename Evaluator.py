@@ -119,11 +119,27 @@ class Evaluator(Transformer):
     def returnstr(self, args):
         return "return"
     def comma(self, args):
-        return " , "
+        return " and "
+    def funfuncall(self, args):
+        arg_list = []
+        for arg in args:
+            arg_list.append(str(arg))
+        args = "".join(arg_list)
+        return args
+    def expfun(self, args) :
+        if len(args) == 1:
+            return args[0]
+        else :
+            arg_list = []
+            for arg in args:
+                arg_list.append(str(arg))
+            args = "".join(arg_list)
+            return args
 def transform_result(entry):
     grammar = Parser.grammar()
     parser = Parser.parser(grammar, "start")
     tree = Parser.tree_generator(parser, entry)
-    print(tree.pretty())
     evaled = Evaluator().transform(tree)[1:-1].split(", ")
+    for i in range(len(evaled)):
+        evaled[i] = evaled[i].replace("and", ",")
     return evaled

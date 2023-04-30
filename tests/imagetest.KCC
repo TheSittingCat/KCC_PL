@@ -1,0 +1,8 @@
+function getimage() {
+    imagepixels, image = openimage("gaunter_o_dimm.jpg");
+    return imagepixels;
+}
+function main() {
+    pixels = getimage();
+    showimage(pixels);
+}

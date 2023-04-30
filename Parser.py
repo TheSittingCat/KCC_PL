@@ -26,16 +26,18 @@ def grammar() :
     comma: ","
     %import common.ESCAPED_STRING -> STRING
     %import common.SIGNED_NUMBER -> NUMBER
-    name: /[a-zA-Z0-9]+/
     %import common.WS
     %ignore WS
-    expstr: STRING end | name equals STRING end | exp
-    exp: NUMBER | exp1 | name equals exp1 end | expstr
+    expfun: (name comma name)+ equals funcall | name equals funcall | exp | expstr
+    expstr: STRING end | name equals STRING end | exp | expfun
+    exp: NUMBER | exp1 | name equals exp1 end | expstr | expfun
     exp1: exp1 plus exp1 | exp1 minus exp1 | exp1 multiply exp2 | exp1 divide exp2 | exp1 modulus exp2 | exp2
     exp2: exp2 multiply exp2 | exp2 divide exp2 | exp2 modulus exp2 | exp2 power exp3 | exp3 
     exp3: exp3 power exp3 | exp
-    funcall: name lp (name | name equals exp | name equals expstr | exp | name comma | name equals exp comma | name equals expstr comma | exp comma)* rp end
+    funcall: name lp (name | name equals exp | name equals expstr | exp | name comma | name equals exp comma | name equals expstr comma | exp comma | STRING | funfuncall | name equals name)* rp end
+    funfuncall: name lp (name | name equals exp | name equals expstr | exp | name comma | name equals exp comma | name equals expstr comma | exp comma | STRING | funfuncall)* rp
     returnstatement: returnstr (exp | expstr | funcall | name) end
+    name: /[a-zA-Z0-9]+/
     '''
     return grammar
 def parser(grammar, starter) :

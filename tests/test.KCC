@@ -1,0 +1,9 @@
+function kaveh() {
+shayesteh = "This is a placeholder string used for nested function call test.";
+return shayesteh; 
+}
+function main() {
+kaveh();
+hello = kaveh();
+print(hello);
+}
