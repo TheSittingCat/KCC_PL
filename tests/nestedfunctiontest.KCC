@@ -1,0 +1,7 @@
+function first() { 
+    kaveh = "This is a placeholder string used for nested function call test.";
+    return kaveh;
+}
+function main() { 
+    print(first());
+}

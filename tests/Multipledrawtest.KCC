@@ -1,0 +1,11 @@
+function draw() {
+    circ = circle(radius = 60);
+    ep = ellipse(width = 55, height = 45);
+}
+function foo() {
+    kaveh = "Hi";
+}
+function main() {
+    draw();
+    show();
+}

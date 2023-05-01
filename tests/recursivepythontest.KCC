@@ -1,0 +1,10 @@
+function main(kaveh = 5, counter = 0) {
+    counter = counter + kaveh;
+<python>
+if kaveh == 1 : 
+    print(counter)
+    return 1
+</python>
+    print(counter);
+    main(kaveh = kaveh - 1, counter = counter);
+}

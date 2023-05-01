@@ -5,4 +5,5 @@ function getimage() {
 function main() {
     pixels = getimage();
     showimage(pixels);
+    show();
 }

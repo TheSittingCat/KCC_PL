@@ -37,6 +37,12 @@ def write_file(file_name, code):
     else:
         code = code_new
         del code_new
+    sumnum = sum(1 for _ in re.finditer(r'\b%s\b'% re.escape('def'), code))
+    if sumnum > 2: 
+        # sumnum - 2 because we already remove the initial brackets. For 3 functions, we do a single deletion. For 4 functions, we do 2 deletions and so on.
+        for i in range(sumnum - 2) : 
+            code = code.replace(r'[',"", 1)
+            code = code.replace(r']',"", 1)
     code = re.sub(r"\\", "", code)
     file_name = re.sub(r"\.KCC$", ".py", file_name)
     current_folder_path = os.path.abspath(os.getcwd())
@@ -65,25 +71,32 @@ def isolate_python_code(code):
     # The python code is returned and the KCC code is modified to remove the python code.
     # Returns the python code and the modified KCC code, as well as the index of the python code.
     # The index is used to insert the python code back into the KCC code.
-    regex = re.compile(r"<python>(.*?)</python>", re.DOTALL)
+    regex = re.compile(r"<python>(.*)</python>", re.DOTALL)
     python_code = regex.findall(code)
     #add tabs to the start of each code.
-    for i in range(len(python_code)):
-        python_code_first_match = "\n \t"
-        python_code[i] = python_code[i].replace("\n","", 1)
-        python_code[i] = python_code[i].replace("\t", "\t \t")
-        python_code[i] = python_code_first_match + python_code[i][:-1]
+    import copy
+    new_python_code = copy.deepcopy(python_code)
+    for i in range(len(new_python_code)):
+        new_python_code[i] = new_python_code[i].replace("\n","", 1)
+        new_python_code[i] = new_python_code[i].replace("\t", "\t \t")
+        new_python_code[i] = new_python_code[i].replace('   ', "\t \t")
+        new_python_code[i] = new_python_code[i][:-1]
+        new_python_code[i] = new_python_code[i] + "\n \t"
+    # Replace the python code with the new python code.
+        code = re.sub(python_code[i], new_python_code[i], code)
     # Find the indexes of the python code.
     matches = re.finditer(regex, code)
-    indexes = [m.start() for m in matches]
+    indexes = [m.start() for m in matches] # There is a bug here. The indexes are not correct as the number of characters change. TODO: Replace with list version.
     # Remove the python code from the KCC code.
     code = regex.sub("", code)
-    return python_code, code, indexes
+    print(indexes)
+    print(len(code))
+    return new_python_code, code, indexes
 def add_back_python_code(code, python_code, indexes):
     # Add the python code back into the compiled python code.
     # Use indexes to insert the python code back into the KCC code.
     for i in range(len(indexes)):
-        code = code[:indexes[i]+ 1] + python_code[i] + code[indexes[i] + 1:]
+        code = code[:indexes[i]+ 1] + "\n \t" + python_code[i] + code[indexes[i] + 1:]
     return code
 def run_python_code(path) : 
     # Run a python file.
@@ -113,6 +126,6 @@ def main() :
     code = add_back_python_code(code, python_code, indexes)
     file_name, code = write_file(file_name, code)
     run_python_code(file_name)
-    #delete_python_file(file_name)
+    delete_python_file(file_name)
     print("--- %s seconds ---" % (time.time() - start_time))
 main()

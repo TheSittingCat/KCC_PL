@@ -1,0 +1,10 @@
+function draw() {
+    exp = exponential();
+}
+function foo() {
+    kaveh = "Hi";
+}
+function main() {
+    draw();
+    show();
+}

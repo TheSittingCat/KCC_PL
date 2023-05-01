@@ -23,8 +23,7 @@ def showimage(imagepixels = None, image = None, imagesize = None, imagemode = No
             imagemode = "RGB"
         if imagesize is None:
             imagesize = (1280, 724)
-        img = plt.imshow(imagepixels)
-        plt.show()
+        plt.imshow(imagepixels)
     elif image is not None:
         image.show()
     else : 
@@ -93,7 +92,7 @@ def log(x = None, base = 10, rng = (1, 100)):
     plt.plot(x, y)
     return y
 
-def circle(center, radius):
+def circle(center = (80, 80), radius = 50):
     x = center[0]
     y = center[1]
     figure, axes = plt.subplots()
@@ -101,10 +100,12 @@ def circle(center, radius):
     axes.set_ylim(((y - radius) - 5, (y + radius) + 5))
     axes.add_patch(ptc.Circle(center, radius, fill = False))
 
-def ellipse(center, width, height):
+def ellipse(center = (80, 80), width = 10, height = 15):
     x = center[0]
     y = center[1]
     figure, axes = plt.subplots()
     axes.set_xlim(((x - (width/2)) - 5, (x + (width/2)) + 5))
     axes.set_ylim(((y - (height/2)) - 5, (y + (height/2)) + 5))
     axes.add_patch(ptc.Ellipse(center, width, height, fill = False))
+def show():
+    plt.show()
