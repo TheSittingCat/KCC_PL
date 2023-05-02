@@ -89,8 +89,6 @@ def isolate_python_code(code):
     indexes = [m.start() for m in matches] # There is a bug here. The indexes are not correct as the number of characters change. TODO: Replace with list version.
     # Remove the python code from the KCC code.
     code = regex.sub("", code)
-    print(indexes)
-    print(len(code))
     return new_python_code, code, indexes
 def add_back_python_code(code, python_code, indexes):
     # Add the python code back into the compiled python code.
